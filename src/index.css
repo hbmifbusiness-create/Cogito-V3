@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=JetBrains+Mono:wght@400;700&family=Archivo:wght@400;700;900&family=Archivo+Black&family=Montserrat:wght@400;700;900&family=Orbitron:wght@400;700;900&family=Bungee&family=Special+Elite&family=Fredoka:wght@400;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", -apple-system, system-ui, sans-serif;
+  --font-display: "Space Grotesk", -apple-system, system-ui, sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-brutal: "Archivo Black", sans-serif;
+}
+
+@layer base {
+  :root {
+    --theme-button-radius: 12px;
+    --theme-card-radius: 24px;
+    --theme-border-width: 1px;
+    --theme-button-shadow: none;
+    --theme-bg-pattern: none;
+  }
+
+  button {
+    @apply cursor-pointer transition-all duration-200 outline-none;
+    border-radius: var(--theme-button-radius) !important;
+    border-width: var(--theme-border-width) !important;
+  }
+
+  /* Override common tailwind rounding to follow theme */
+  .rounded-xl, .rounded-2xl, .rounded-3xl, .rounded-\[32px\], .rounded-\[40px\], .rounded-\[48px\] {
+    border-radius: var(--theme-card-radius) !important;
+  }
+  
+  .rounded-lg, .rounded-md {
+    border-radius: var(--theme-button-radius) !important;
+  }
+  
+  [data-theme-animate='rubberhose'] button:hover {
+    animation: rubberBand 0.5s;
+  }
+  
+  [data-theme-animate='anthropomorphic'] button:hover {
+     transform: scale(1.1);
+  }
+  
+  [data-theme-animate='grunge'] button {
+     clip-path: polygon(2% 0%, 100% 0%, 98% 100%, 0% 100%);
+  }
+  
+  [data-theme-animate='brutalism'] button {
+    box-shadow: 6px 6px 0px 0px var(--accent) !important;
+    transform: translate(-2px, -2px);
+  }
+  
+  [data-theme-animate='brutalism'] button:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px 0px var(--accent) !important;
+  }
+
+  [data-theme-animate='cybercore'] * {
+     text-shadow: 0 0 2px var(--accent);
+  }
+  
+  [data-theme-animate='cybercore'] button {
+    box-shadow: 0 0 10px var(--accent) !important;
+  }
+
+  @keyframes rubberBand {
+    0% { transform: scale(1); }
+    30% { transform: scaleX(1.2) scaleY(0.8); }
+    40% { transform: scaleX(0.8) scaleY(1.2); }
+    50% { transform: scaleX(1.1) scaleY(0.9); }
+    65% { transform: scaleX(0.95) scaleY(1.05); }
+    75% { transform: scaleX(1.05) scaleY(0.95); }
+    100% { transform: scale(1); }
+  }
+
+  .theme-card {
+    border-radius: var(--theme-card-radius);
+    border-width: var(--theme-border-width);
+    background-image: var(--theme-bg-pattern);
+  }
+
+  main {
+    background-image: var(--theme-bg-pattern);
+  }
+
+  button:active {
+    @apply scale-[0.97] brightness-90;
+  }
+}
+
+@layer utilities {
+  .btn-active-shade {
+     @apply active:brightness-[0.80] active:shadow-inner;
+  }
+  
+  .hover-lift {
+    @apply hover:-translate-y-0.5 hover:shadow-lg transition-all;
+  }
+  
+  .hover-scale {
+    @apply hover:scale-105 transition-all;
+  }
+  
+  .tab-transition {
+    @apply transition-all duration-300 ease-in-out;
+  }
+}
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+.font-black, .font-display {
+  font-family: var(--font-display);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+.accessibility-reading {
+  line-height: 2 !important;
+  letter-spacing: 0.05em !important;
+}
+
+.accessibility-reading p {
+  max-width: 65ch !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.accessibility-contrast {
+  --text-primary: #000000 !important;
+  --text-secondary: #000000 !important;
+  --text-muted: #1a1a1a !important;
+  --bg-primary: #ffffff !important;
+  --bg-surface: #ffffff !important;
+  --border-color: #000000 !important;
+}
+
+[data-reduced-motion="true"] * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
